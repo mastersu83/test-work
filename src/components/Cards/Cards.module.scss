@@ -1,0 +1,12 @@
+.card {
+  &__container {
+  }
+
+  &__items {
+    display: grid;
+    grid-template: auto / repeat(4, 214px);
+    column-gap: 20px;
+    row-gap: 30px;
+    max-width: 915px;
+  }
+}

@@ -1,0 +1,56 @@
+.rightBar {
+  width: 351px;
+  padding: 20px;
+  border-left: 1px solid #f0f4fb;
+  &__moreInfo {
+    border: 1px solid #ff2d87;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    row-gap: 15px;
+    position: relative;
+    .moreInfo__title {
+      font-weight: 600;
+      font-size: 20px;
+      color: #2967ff;
+      max-width: 160px;
+    }
+
+    .moreInfo__btn {
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 19px;
+      color: #ffffff;
+      background: #2967ff;
+      border-radius: 51px;
+      padding: 10px 25px;
+      border: none;
+      cursor: pointer;
+    }
+    .moreInfo__image {
+      position: absolute;
+      top: 25px;
+      left: -12px;
+    }
+  }
+  &__newCollections {
+    display: grid;
+    grid-template: auto / 1fr;
+    padding: 30px 0;
+    row-gap: 20px;
+    .newCollection__item {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 23px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url(../../assets/img/baner.png);
+      height: 168px;
+      border-radius: 20px;
+    }
+  }
+}

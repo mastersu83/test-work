@@ -1,24 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import classes from "./App.module.scss";
+import Header from "./components/Header/Header";
+import Category from "./components/Category/Category";
+import Footer from "./components/Footer/Footer";
+import RightBar from "./components/RightBar/RightBar";
+import Cards from "./components/Cards/Cards";
+import Basket from "./components/Basket/Basket";
+import Order from "./components/Order/Order";
+import { Route, Routes } from "react-router-dom";
+import OrdersHistory from "./components/HistoryOrders/OrdersHistory";
+import { useSelector } from "react-redux";
 
 function App() {
+  const state = useSelector((state) => state);
+  console.log(state);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={classes.root}>
+      <div className={classes.main}>
+        <div className={classes.content}>
+          <Header />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <Category />
+                  <Cards />
+                </>
+              }
+            />
+            <Route path="basket" element={<Basket />} />
+            <Route path="order" element={<Order />} />
+            <Route path="history-order" element={<OrdersHistory />} />
+          </Routes>
+        </div>
+        <RightBar />
+      </div>
+      <Footer />
     </div>
   );
 }

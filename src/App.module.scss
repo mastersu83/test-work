@@ -1,0 +1,32 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:regular,500,600,700);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:700);
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: #000000;
+  &:active {
+    color: #000000;
+  }
+}
+
+.root {
+  width: 1366px;
+  margin: 0 auto;
+  font-family: "Raleway", serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  color: #2d2d2f;
+}
+.main {
+  display: flex;
+}
+.content {
+  width: 1015px;
+  padding: 0 50px 30px;
+}

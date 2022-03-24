@@ -1,0 +1,105 @@
+.header {
+  .logo {
+    font-family: "Montserrat", serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 50px;
+    margin: 0;
+  }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 0;
+  &__locationBlock {
+    position: relative;
+    padding-left: 20px;
+    &::before {
+      position: absolute;
+      content: "";
+      width: 15px;
+      height: 20px;
+      top: 0;
+      left: 0;
+      background: url(../../assets/img/locationIcon.svg) no-repeat;
+    }
+  }
+
+  .searchBlock {
+    background: #ffffff;
+    width: 468px;
+    height: 50px;
+    border: 1px solid #f0f4fb;
+    box-sizing: border-box;
+    border-radius: 36px;
+    padding: 4px;
+    display: flex;
+    justify-content: space-between;
+    column-gap: 10px;
+    &__input {
+      width: 100%;
+      border: none;
+      border-radius: 41px;
+      padding: 0 20px;
+    }
+
+    &__button {
+      width: 94px;
+      height: 100%;
+      background-color: #f0f4fb;
+      border: none;
+      border-radius: 41px;
+      position: relative;
+      cursor: pointer;
+      &::before {
+        position: absolute;
+        content: "";
+        width: 20px;
+        height: 20px;
+        top: 10px;
+        left: 30px;
+        background: url(../../assets/img/searchIcon.svg);
+      }
+    }
+  }
+
+  &__basketWrapper {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid #727280;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    .basket__countWrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      top: -5px;
+      right: -12px;
+      background-color: #ffffff;
+    }
+    .basket__count {
+      font-weight: 600;
+      color: #2967ff;
+    }
+  }
+
+  &__basket {
+  }
+
+  &__avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+
+  &__historyLink {
+    width: 50px;
+    height: 50px;
+  }
+}

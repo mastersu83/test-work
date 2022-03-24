@@ -1,0 +1,70 @@
+.basket {
+  &__title {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+  }
+
+  &__setup {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    color: #ff2d87;
+    margin-left: 28px;
+  }
+
+  &__container {
+    border: 1px solid #aec2ea;
+    box-sizing: border-box;
+    border-radius: 20px;
+    margin-top: 30px;
+  }
+
+  &__items {
+    padding: 40px 60px;
+    display: flex;
+    flex-direction: column;
+  }
+}
+.checkout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #aec2ea;
+  border-radius: 20px;
+  padding: 0 30px;
+  &__title {
+  }
+
+  &__priceWrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+  }
+
+  &__price {
+    font-size: 16px;
+  }
+
+  &__sum {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+  }
+
+  &__btn {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    color: #ffffff;
+    background: #2967ff;
+    border-radius: 51px;
+    border: none;
+    padding: 15px 65px;
+    cursor: pointer;
+  }
+
+  &__img {
+  }
+}

@@ -1,0 +1,99 @@
+.order {
+  display: flex;
+  flex-direction: column;
+  &__title {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    margin-bottom: 30px;
+  }
+
+  &__container {
+    display: flex;
+    column-gap: 80px;
+  }
+
+  &__delivery {
+    width: 50%;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__sum {
+    background-color: #f0f4fb;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    height: max-content;
+    row-gap: 10px;
+    min-width: 300px;
+  }
+
+  &__sumProducts {
+  }
+
+  &__sumDelivery {
+  }
+
+  &__sumTotal {
+    margin-top: 10px;
+    span {
+      font-weight: 600;
+      font-size: 16px;
+    }
+  }
+
+  &__btn {
+    background: #2967ff;
+    border-radius: 51px;
+    padding: 15px 90px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    align-self: center;
+  }
+}
+.input {
+  margin-bottom: 20px;
+  border: 1px solid #c9ccd2;
+  box-sizing: border-box;
+  border-radius: 45px;
+  padding: 10px;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+.form {
+  &__dateBox {
+    width: 100%;
+    display: flex;
+    column-gap: 20px;
+  }
+  &__label {
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  &__date {
+    width: 50%;
+  }
+
+  &__address {
+  }
+
+  &__name {
+  }
+
+  &__phone {
+  }
+}
