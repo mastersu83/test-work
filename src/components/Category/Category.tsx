@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import classes from "./Category.module.scss";
-
-const categoryList = [
-  "Игрушка",
-  "Мартышка",
-  "Мишка",
-  "Подарок",
-  "Подарок коллегам",
-  "День Рождения Гриши",
-];
+import { useGetAllCategoriesQuery } from "../../services/categoryAPI";
+import { useAppDispatch } from "../../hooks/appHooks";
+import { setCategoryId } from "../../redux/reducers/categorySlice";
 
 const Category = () => {
+  const dispatch = useAppDispatch();
+  const { data: categoryList } = useGetAllCategoriesQuery({});
   const [active, setActive] = useState<number>(0);
+
+  const getCategoryId = (id: number, index: number) => {
+    dispatch(setCategoryId(id));
+    setActive(index);
+  };
 
   return (
     <div className={classes.category}>
@@ -21,17 +22,18 @@ const Category = () => {
       </span>
 
       <div className={classes.category__tabs}>
-        {categoryList.map((cat, index) => (
-          <button
-            key={cat}
-            onClick={() => setActive(index)}
-            className={`${classes.category__tab} ${
-              active === index ? classes.active : ""
-            }`}
-          >
-            {cat}
-          </button>
-        ))}
+        {categoryList &&
+          categoryList.map((cat, index) => (
+            <button
+              key={cat.id}
+              onClick={() => getCategoryId(cat.id, index)}
+              className={`${classes.category__tab} ${
+                active === index ? classes.active : ""
+              }`}
+            >
+              {cat.name}
+            </button>
+          ))}
       </div>
     </div>
   );

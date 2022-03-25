@@ -6,6 +6,7 @@
   }
 
   &__img {
+    width: 214px;
   }
 
   &__title {
@@ -41,5 +42,37 @@
     &:active {
       background-color: #102c70;
     }
+  }
+}
+
+.sliderContainer {
+  position: relative;
+  font-size: 20px;
+  color: #ffffff;
+  background-color: transparent;
+  overflow: hidden;
+  .slider {
+    display: flex;
+  }
+
+  .left {
+    top: 98px;
+    left: 0;
+  }
+  .right {
+    top: 98px;
+    right: 0;
+  }
+  .arrow {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    background-color: rgba(45, 45, 47, 0.54);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    border-radius: 50%;
   }
 }

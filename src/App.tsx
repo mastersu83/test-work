@@ -9,12 +9,8 @@ import Basket from "./components/Basket/Basket";
 import Order from "./components/Order/Order";
 import { Route, Routes } from "react-router-dom";
 import OrdersHistory from "./components/HistoryOrders/OrdersHistory";
-import { useSelector } from "react-redux";
 
 function App() {
-  const state = useSelector((state) => state);
-  console.log(state);
-
   return (
     <div className={classes.root}>
       <div className={classes.main}>
