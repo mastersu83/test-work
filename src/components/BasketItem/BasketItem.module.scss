@@ -8,10 +8,11 @@
   }
 
   &__itemImg {
+    height: 100px;
   }
 
   &__itemTitle {
-    max-width: 290px;
+    width: 220px;
     max-height: 43px;
     overflow: hidden;
     white-space: nowrap;
@@ -28,16 +29,14 @@
     column-gap: 25px;
   }
 
-  &__countPlus {
+  &__countButtons {
     cursor: pointer;
+    font-size: 30px;
+    font-weight: 600;
   }
 
   &__count {
     font-size: 16px;
-  }
-
-  &__countMinus {
-    cursor: pointer;
   }
 
   &__itemPrice {

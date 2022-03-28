@@ -28,6 +28,7 @@ const productsSlice = createSlice({
       action: PayloadAction<IProductsType[]>
     ) {
       state.allProductsId = action.payload.map((prod) => prod.id);
+      state.products = action.payload;
     },
     setAllProductsImg(
       state: initialStateType,

@@ -21,21 +21,22 @@ const Cards = () => {
     (state) => state.products
   );
 
-  const {
-    data: products,
-    isLoading,
-    isSuccess: isSuccessProducts,
-  } = useGetCategoryProductsQuery(categoryId);
-  const { data: productsImg } = useGetProductsImgQuery(allProductsId);
-  const { data: productsPrice } = useGetProductsPriceQuery(allProductsId);
+  const { data: products, isSuccess: isSuccessProducts } =
+    useGetCategoryProductsQuery(categoryId);
+  const { data: productsImg, isSuccess: isSuccessImg } =
+    useGetProductsImgQuery(allProductsId);
+  const { data: productsPrice, isSuccess: isSuccessPrice } =
+    useGetProductsPriceQuery(allProductsId);
 
   useEffect(() => {
-    if (products && productsImg && productsPrice) {
+    if (isSuccessProducts && isSuccessImg && isSuccessPrice) {
       dispatch(getAllProductsId(products));
       dispatch(setAllProductsImg(productsImg));
       dispatch(setAllProductsPrice(productsPrice));
     }
   }, [products, productsImg, productsPrice]);
+
+  console.log(price);
 
   return (
     <div className={classes.card__container}>
