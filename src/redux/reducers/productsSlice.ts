@@ -8,11 +8,19 @@ import {
 type initialStateType = {
   products: IProductsType[];
   allProductsId: number[];
+  range: {
+    min: number;
+    max: number;
+  };
 };
 
 const initialState: initialStateType = {
   products: [],
   allProductsId: [],
+  range: {
+    min: 0,
+    max: 11,
+  },
 };
 
 const productsSlice = createSlice({
@@ -38,7 +46,12 @@ const productsSlice = createSlice({
         ),
       }));
     },
+    getMoreProducts(state: initialStateType) {
+      state.range.min = state.range.min + 12;
+      state.range.max = state.range.max + 12;
+    },
   },
+
   // extraReducers: {
   //   [getCategoryProducts.fulfilled.type]: (
   //     state: initialStateType,
@@ -49,6 +62,6 @@ const productsSlice = createSlice({
   // },
 });
 
-export const { getAllProductsId } = productsSlice.actions;
+export const { getAllProductsId, getMoreProducts } = productsSlice.actions;
 
 export default productsSlice.reducer;

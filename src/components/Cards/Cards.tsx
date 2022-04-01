@@ -6,21 +6,32 @@ import {
   useGetProductsImgQuery,
   useGetProductsPriceQuery,
 } from "../../services/productsAPI";
-import { getAllProductsId } from "../../redux/reducers/productsSlice";
+import {
+  getAllProductsId,
+  getMoreProducts,
+} from "../../redux/reducers/productsSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/appHooks";
 
 const Cards = () => {
   const dispatch = useAppDispatch();
   const { categoryId } = useAppSelector((state) => state.category);
 
-  const { allProductsId, products } = useAppSelector((state) => state.products);
+  const { allProductsId, products, range } = useAppSelector(
+    (state) => state.products
+  );
 
   const { data: allProducts, isSuccess: isSuccessProducts } =
-    useGetCategoryProductsQuery(categoryId);
+    useGetCategoryProductsQuery({ categoryId, range });
+
   const { data: productsImg, isSuccess: isSuccessImg } =
     useGetProductsImgQuery(allProductsId);
+
   const { data: productsPrice, isSuccess: isSuccessPrice } =
     useGetProductsPriceQuery(allProductsId);
+
+  const moreProducts = () => {
+    dispatch(getMoreProducts());
+  };
 
   useEffect(() => {
     if (isSuccessProducts && isSuccessImg && isSuccessPrice) {
@@ -36,7 +47,7 @@ const Cards = () => {
           isSuccessPrice &&
           products.map((prod) => <Card key={prod.id} {...prod} />)}
       </div>
-      <button>Ещё товары</button>
+      <button onClick={moreProducts}>Ещё товары</button>
     </div>
   );
 };

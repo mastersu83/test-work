@@ -12,19 +12,22 @@ export const productsApi = createApi({
   }),
   tagTypes: ["Products"],
   endpoints: (build) => ({
-    getCategoryProducts: build.query<IProductsType[], number>({
-      query: (id) =>
-        `products?filter={%22category_id%22:[${id}]}&range=[0,11]&sort=[%22description%22,%22ASC%22]`,
+    getCategoryProducts: build.query<
+      IProductsType[],
+      { categoryId: number; range: { min: number; max: number } }
+    >({
+      query: ({ categoryId, range }) =>
+        `products?filter={%22category_id%22:[${categoryId}]}&range=[${range.min},${range.max}]&sort=[%22description%22,%22ASC%22]`,
     }),
     getProductsImg: build.query<IProductsImgType[], number[]>({
       query: (ids) => ({
-        url: `productImages?filter={%22product_id%22:[${ids}]}&range=[0,35]`,
+        url: `productImages?filter={%22product_id%22:[${ids}]}`,
       }),
       providesTags: ["Products"],
     }),
     getProductsPrice: build.query<IProductsPriceType[], number[]>({
       query: (ids) => ({
-        url: `ProductVariations?filter={%22product_id%22:[${ids}]}&range=[0,47]&sort=[%22price%22,%22ASC%22]`,
+        url: `ProductVariations?filter={%22product_id%22:[${ids}]}&sort=[%22price%22,%22ASC%22]`,
       }),
       providesTags: ["Products"],
     }),
