@@ -35,7 +35,9 @@ const basketSlice = createSlice({
     ) {
       if (state.productsInBasket.length) {
         state.productsInBasket.some(
-          (prod) => prod.price.id === action.payload.price.id
+          (prod) =>
+            prod.price.id === action.payload.price.id &&
+            prod.images.id === action.payload.images.id
         )
           ? (state.ifProductAddedInBasket = "Товар уже добавлен в корзину")
           : state.productsInBasket.push(action.payload);
@@ -45,14 +47,14 @@ const basketSlice = createSlice({
     },
     countPlus(state: initialStateType, action: PayloadAction<number>) {
       state.productsInBasket = state.productsInBasket.map((prod) =>
-        prod.price.id === action.payload
+        prod.id === action.payload
           ? { ...prod, countProdInBasket: prod.countProdInBasket + 1 }
           : prod
       );
     },
     countMinus(state: initialStateType, action: PayloadAction<number>) {
       state.productsInBasket = state.productsInBasket.map((prod) =>
-        prod.price.id === action.payload
+        prod.id === action.payload
           ? { ...prod, countProdInBasket: prod.countProdInBasket - 1 }
           : prod
       );
@@ -62,7 +64,6 @@ const basketSlice = createSlice({
       state: initialStateType,
       action: PayloadAction<{ totalSum: number; totalCount: number }>
     ) {
-      console.log(action.payload);
       state.totalSum = action.payload.totalSum;
       state.totalCount = action.payload.totalCount;
     },

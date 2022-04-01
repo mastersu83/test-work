@@ -44,7 +44,7 @@ const Basket = () => {
         <div className={classes.basket__items}>
           {productsInBasket.length ? (
             productsInBasket.map((prod) => (
-              <BasketItem key={prod.price.id} {...prod} />
+              <BasketItem key={`${prod.price.id}${prod.id}`} {...prod} />
             ))
           ) : (
             <h2>В корзине нет товаров</h2>

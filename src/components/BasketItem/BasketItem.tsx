@@ -14,16 +14,17 @@ const BasketItem: FC<IProductsInBasket> = ({
   price,
   images,
   countProdInBasket,
+  id,
 }) => {
   const dispatch = useAppDispatch();
 
   const counterMinus = () => {
     if (countProdInBasket > 1) {
-      dispatch(countMinus(price.id));
+      dispatch(countMinus(id));
     }
   };
   const counterPlus = () => {
-    dispatch(countPlus(price.id));
+    dispatch(countPlus(id));
   };
 
   const onRemoveProduct = () => {

@@ -6,11 +6,7 @@ import {
   useGetProductsImgQuery,
   useGetProductsPriceQuery,
 } from "../../services/productsAPI";
-import {
-  getAllProductsId,
-  setAllProductsImg,
-  setAllProductsPrice,
-} from "../../redux/reducers/productsSlice";
+import { getAllProductsId } from "../../redux/reducers/productsSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/appHooks";
 
 const Cards = () => {
@@ -28,9 +24,7 @@ const Cards = () => {
 
   useEffect(() => {
     if (isSuccessProducts && isSuccessImg && isSuccessPrice) {
-      dispatch(getAllProductsId(allProducts));
-      dispatch(setAllProductsImg(productsImg));
-      dispatch(setAllProductsPrice(productsPrice));
+      dispatch(getAllProductsId({ allProducts, productsImg, productsPrice }));
     }
   }, [allProducts, productsImg, productsPrice, dispatch]);
 
@@ -42,6 +36,7 @@ const Cards = () => {
           isSuccessPrice &&
           products.map((prod) => <Card key={prod.id} {...prod} />)}
       </div>
+      <button>Ещё товары</button>
     </div>
   );
 };

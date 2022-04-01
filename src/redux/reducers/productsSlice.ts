@@ -21,27 +21,21 @@ const productsSlice = createSlice({
   reducers: {
     getAllProductsId(
       state: initialStateType,
-      action: PayloadAction<IProductsType[]>
+      action: PayloadAction<{
+        allProducts: IProductsType[];
+        productsImg: IProductsImgType[];
+        productsPrice: IProductsPriceType[];
+      }>
     ) {
-      state.allProductsId = action.payload.map((prod) => prod.id);
-      state.products = action.payload;
-    },
-    setAllProductsImg(
-      state: initialStateType,
-      action: PayloadAction<IProductsImgType[]>
-    ) {
-      state.products = state.products.map((prod) => ({
+      state.allProductsId = action.payload.allProducts.map((prod) => prod.id);
+      state.products = action.payload.allProducts.map((prod) => ({
         ...prod,
-        images: action.payload.filter((img) => img.product_id === prod.id),
-      }));
-    },
-    setAllProductsPrice(
-      state: initialStateType,
-      action: PayloadAction<IProductsPriceType[]>
-    ) {
-      state.products = state.products.map((prod) => ({
-        ...prod,
-        price: action.payload.filter((price) => price.product_id === prod.id),
+        images: action.payload.productsImg.filter(
+          (img) => img.product_id === prod.id
+        ),
+        price: action.payload.productsPrice.filter(
+          (price) => price.product_id === prod.id
+        ),
       }));
     },
   },
@@ -55,7 +49,6 @@ const productsSlice = createSlice({
   // },
 });
 
-export const { getAllProductsId, setAllProductsImg, setAllProductsPrice } =
-  productsSlice.actions;
+export const { getAllProductsId } = productsSlice.actions;
 
 export default productsSlice.reducer;
