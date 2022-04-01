@@ -1,16 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
-import productsSlice from "./reducers/productsSlice";
-import categorySlice from "./reducers/categorySlice";
+import products from "./reducers/productsSlice";
+import category from "./reducers/categorySlice";
+import basket from "./reducers/basketSlice";
+import orders from "./reducers/orderSlice";
 import { categoryApi } from "../services/categoryAPI";
 import { productsApi } from "../services/productsAPI";
-import basketSlice from "./reducers/basketSlice";
 
 export const setupState = () => {
   return configureStore({
     reducer: {
-      products: productsSlice,
-      category: categorySlice,
-      basket: basketSlice,
+      products,
+      category,
+      basket,
+      orders,
       [categoryApi.reducerPath]: categoryApi.reducer,
       [productsApi.reducerPath]: productsApi.reducer,
     },

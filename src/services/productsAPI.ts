@@ -13,7 +13,8 @@ export const productsApi = createApi({
   tagTypes: ["Products"],
   endpoints: (build) => ({
     getCategoryProducts: build.query<IProductsType[], number>({
-      query: (id) => `products?filter={%22category_id%22:[${id}]}&range=[0,11]`,
+      query: (id) =>
+        `products?filter={%22category_id%22:[${id}]}&range=[0,11]&sort=[%22description%22,%22ASC%22]`,
     }),
     getProductsImg: build.query<IProductsImgType[], number[]>({
       query: (ids) => ({
@@ -23,7 +24,7 @@ export const productsApi = createApi({
     }),
     getProductsPrice: build.query<IProductsPriceType[], number[]>({
       query: (ids) => ({
-        url: `ProductVariations?filter={%22product_id%22:[${ids}]}&range=[0,47]`,
+        url: `ProductVariations?filter={%22product_id%22:[${ids}]}&range=[0,47]&sort=[%22price%22,%22ASC%22]`,
       }),
       providesTags: ["Products"],
     }),

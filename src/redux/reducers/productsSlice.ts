@@ -8,15 +8,11 @@ import {
 type initialStateType = {
   products: IProductsType[];
   allProductsId: number[];
-  images: IProductsImgType[];
-  price: IProductsPriceType[];
 };
 
 const initialState: initialStateType = {
   products: [],
   allProductsId: [],
-  images: [],
-  price: [],
 };
 
 const productsSlice = createSlice({
@@ -34,13 +30,19 @@ const productsSlice = createSlice({
       state: initialStateType,
       action: PayloadAction<IProductsImgType[]>
     ) {
-      state.images = action.payload;
+      state.products = state.products.map((prod) => ({
+        ...prod,
+        images: action.payload.filter((img) => img.product_id === prod.id),
+      }));
     },
     setAllProductsPrice(
       state: initialStateType,
       action: PayloadAction<IProductsPriceType[]>
     ) {
-      state.price = action.payload;
+      state.products = state.products.map((prod) => ({
+        ...prod,
+        price: action.payload.filter((price) => price.product_id === prod.id),
+      }));
     },
   },
   // extraReducers: {

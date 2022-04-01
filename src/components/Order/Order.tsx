@@ -1,7 +1,18 @@
 import React from "react";
 import classes from "./Order.module.scss";
+import { useAppDispatch, useAppSelector } from "../../hooks/appHooks";
+import { setOrder } from "../../redux/reducers/orderSlice";
 
 const Order = () => {
+  const dispatch = useAppDispatch();
+  const { productsInBasket, totalSum, totalCount } = useAppSelector(
+    (state) => state.basket
+  );
+
+  const order = () => {
+    dispatch(setOrder({ productsInBasket, totalSum, totalCount }));
+  };
+
   return (
     <div className={classes.order}>
       <span className={classes.order__title}> Доставка </span>
@@ -52,17 +63,21 @@ const Order = () => {
         </div>
         <div className={classes.order__sum}>
           <span className={`${classes.order__sumProducts} ${classes.flex}`}>
-            Стоимость товаров: <span>200 584₽</span>
+            Стоимость товаров: <span>{totalSum} ₽</span>
           </span>
           <span className={`${classes.order__sumDelivery} ${classes.flex}`}>
-            Стоимость доставки: <span>200₽</span>
+            Стоимость доставки:{" "}
+            <span>{productsInBasket.length ? 200 : 0} ₽</span>
           </span>
           <span className={`${classes.order__sumTotal} ${classes.flex}`}>
-            Итого: <span>200 784₽</span>
+            Итого:{" "}
+            <span>{totalSum + (productsInBasket.length ? 200 : 0)} ₽</span>
           </span>
         </div>
       </div>
-      <button className={classes.order__btn}>Сделать заказ</button>
+      <button onClick={order} className={classes.order__btn}>
+        Сделать заказ
+      </button>
     </div>
   );
 };

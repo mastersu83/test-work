@@ -1,22 +1,28 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IProductsImgType, IProductsPriceType } from "../../types/productsType";
 
 export interface IProductsInBasket {
+  countProdInBasket: number;
   category_id: number;
   description: string;
   id: number;
-  images: string;
   name: string;
-  price: number;
+  images: IProductsImgType;
+  price: IProductsPriceType;
 }
 
 type initialStateType = {
   productsInBasket: IProductsInBasket[];
   ifProductAddedInBasket: string;
+  totalSum: number;
+  totalCount: number;
 };
 
 const initialState: initialStateType = {
   productsInBasket: [],
   ifProductAddedInBasket: "",
+  totalSum: 0,
+  totalCount: 0,
 };
 
 const basketSlice = createSlice({
@@ -29,10 +35,7 @@ const basketSlice = createSlice({
     ) {
       if (state.productsInBasket.length) {
         state.productsInBasket.some(
-          (p) =>
-            p.id === action.payload.id &&
-            p.price === action.payload.price &&
-            p.images === action.payload.images
+          (prod) => prod.price.id === action.payload.price.id
         )
           ? (state.ifProductAddedInBasket = "Товар уже добавлен в корзину")
           : state.productsInBasket.push(action.payload);
@@ -40,21 +43,47 @@ const basketSlice = createSlice({
         state.productsInBasket.push(action.payload);
       }
     },
+    countPlus(state: initialStateType, action: PayloadAction<number>) {
+      state.productsInBasket = state.productsInBasket.map((prod) =>
+        prod.price.id === action.payload
+          ? { ...prod, countProdInBasket: prod.countProdInBasket + 1 }
+          : prod
+      );
+    },
+    countMinus(state: initialStateType, action: PayloadAction<number>) {
+      state.productsInBasket = state.productsInBasket.map((prod) =>
+        prod.price.id === action.payload
+          ? { ...prod, countProdInBasket: prod.countProdInBasket - 1 }
+          : prod
+      );
+    },
+
+    setTotalSum(
+      state: initialStateType,
+      action: PayloadAction<{ totalSum: number; totalCount: number }>
+    ) {
+      console.log(action.payload);
+      state.totalSum = action.payload.totalSum;
+      state.totalCount = action.payload.totalCount;
+    },
     clearBasket(state: initialStateType) {
       state.productsInBasket = [];
     },
-    removeProduct(
-      state: initialStateType,
-      action: PayloadAction<{ id: number; price: number; images: string }>
-    ) {
+    removeProduct(state: initialStateType, action: PayloadAction<number>) {
       state.productsInBasket = state.productsInBasket.filter(
-        (prod) => prod.price !== action.payload.price
+        (prod) => prod.price.id !== action.payload
       );
     },
   },
 });
 
-export const { setProductsInBasket, clearBasket, removeProduct } =
-  basketSlice.actions;
+export const {
+  setProductsInBasket,
+  clearBasket,
+  removeProduct,
+  countPlus,
+  countMinus,
+  setTotalSum,
+} = basketSlice.actions;
 
 export default basketSlice.reducer;

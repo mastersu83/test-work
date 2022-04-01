@@ -13,7 +13,7 @@ const Card: FC<IProductsType> = ({
   category_id,
 }) => {
   const dispatch = useAppDispatch();
-  const [currentPrice, setCurrentPrice] = useState(0);
+  const [currentPrice, setCurrentPrice] = useState<number>(0);
   const [currentImg, setCurrentImg] = useState(0);
   const [offset, setOffset] = useState(0);
 
@@ -21,28 +21,25 @@ const Card: FC<IProductsType> = ({
     setOffset((currentOffset) => {
       return Math.min(currentOffset + 214, 0);
     });
-    setCurrentPrice((prevState) => Math.max(prevState - 1, 0));
     setCurrentImg((prevState) => Math.max(prevState - 1, 0));
   };
   const moveRight = () => {
     setOffset((currentOffset) => {
       return Math.max(currentOffset - 214, -214 * (images.length - 1));
     });
-    setCurrentPrice((prevState) => Math.min(prevState + 1, price.length - 1));
     setCurrentImg((prevState) => Math.min(prevState + 1, images.length - 1));
   };
-
-  // console.log(images);
 
   const onAddProductInBasket = () => {
     dispatch(
       setProductsInBasket({
+        countProdInBasket: 1,
         description,
         id,
         name,
         category_id,
-        images: images[currentImg].image_url,
-        price: price[currentPrice].price,
+        images: images[currentImg],
+        price: price[currentPrice],
       })
     );
   };
@@ -64,7 +61,11 @@ const Card: FC<IProductsType> = ({
           {images.map((img, index) => (
             <img
               key={img.id}
-              src={"https://test2.sionic.ru" + images[index].image_url}
+              src={
+                images[index].image_url
+                  ? "https://test2.sionic.ru" + images[index].image_url
+                  : "https://lider-krovlia.ru/local/templates/aspro-stroy/images/noimage_detail.png"
+              }
               alt=""
               className={classes.card__img}
             />
@@ -78,9 +79,20 @@ const Card: FC<IProductsType> = ({
         </div>
       </div>
       <span className={classes.card__title}>{description}</span>
-      <span className={classes.card__price}>
-        от {price[currentPrice].price} ₽
-      </span>
+      <div className={classes.card__priceBlock}>
+        {price.map((price, index) => (
+          <span
+            key={price.id}
+            onClick={() => setCurrentPrice(index)}
+            className={`${classes.card__price} ${
+              currentPrice === index ? `${classes.card__activePrice}` : ""
+            }`}
+          >
+            {price.price}₽
+          </span>
+        ))}
+      </div>
+
       <button onClick={onAddProductInBasket} className={classes.card__btn}>
         Добавить в корзину
       </button>

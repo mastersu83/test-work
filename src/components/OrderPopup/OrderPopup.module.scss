@@ -1,0 +1,53 @@
+.orderPopup {
+  &__container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+  }
+  &__body {
+    width: 800px;
+    background-color: #ffffff;
+    position: relative;
+    border-radius: 20px 20px 0 20px;
+  }
+  &__items {
+    max-height: 600px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background-color: #aec2ea;
+    }
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      background-color: #f9f9fd;
+    }
+  }
+  &__closeBtn {
+    position: absolute;
+    top: -30px;
+    right: -35px;
+    font-size: 90px;
+    transform: rotate(45deg);
+    color: #ffffff;
+    cursor: pointer;
+  }
+}
+
+.open {
+  visibility: visible;
+  opacity: 1;
+}

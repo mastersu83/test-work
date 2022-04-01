@@ -8,7 +8,7 @@ import Cards from "./components/Cards/Cards";
 import Basket from "./components/Basket/Basket";
 import Order from "./components/Order/Order";
 import { Route, Routes } from "react-router-dom";
-import OrdersHistory from "./components/HistoryOrders/OrdersHistory";
+import OrdersHistory from "./components/OrdersHistory/OrdersHistory";
 
 function App() {
   return (
@@ -33,6 +33,7 @@ function App() {
         </div>
         <RightBar />
       </div>
+      {/*<OrderPopup />*/}
       <Footer />
     </div>
   );

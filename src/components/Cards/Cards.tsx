@@ -17,11 +17,9 @@ const Cards = () => {
   const dispatch = useAppDispatch();
   const { categoryId } = useAppSelector((state) => state.category);
 
-  const { allProductsId, images, price } = useAppSelector(
-    (state) => state.products
-  );
+  const { allProductsId, products } = useAppSelector((state) => state.products);
 
-  const { data: products, isSuccess: isSuccessProducts } =
+  const { data: allProducts, isSuccess: isSuccessProducts } =
     useGetCategoryProductsQuery(categoryId);
   const { data: productsImg, isSuccess: isSuccessImg } =
     useGetProductsImgQuery(allProductsId);
@@ -30,26 +28,19 @@ const Cards = () => {
 
   useEffect(() => {
     if (isSuccessProducts && isSuccessImg && isSuccessPrice) {
-      dispatch(getAllProductsId(products));
+      dispatch(getAllProductsId(allProducts));
       dispatch(setAllProductsImg(productsImg));
       dispatch(setAllProductsPrice(productsPrice));
     }
-  }, [products, productsImg, productsPrice]);
-
-  console.log(price);
+  }, [allProducts, productsImg, productsPrice, dispatch]);
 
   return (
     <div className={classes.card__container}>
       <div className={classes.card__items}>
         {isSuccessProducts &&
-          products.map((prod) => (
-            <Card
-              key={prod.id}
-              {...prod}
-              images={images.filter((i) => i.product_id === prod.id)}
-              price={price.filter((p) => p.product_id === prod.id)}
-            />
-          ))}
+          isSuccessImg &&
+          isSuccessPrice &&
+          products.map((prod) => <Card key={prod.id} {...prod} />)}
       </div>
     </div>
   );
