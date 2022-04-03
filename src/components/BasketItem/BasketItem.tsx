@@ -28,7 +28,7 @@ const BasketItem: FC<IProductsInBasket> = ({
   };
 
   const onRemoveProduct = () => {
-    dispatch(removeProduct(price.id));
+    dispatch(removeProduct(id));
   };
 
   return (

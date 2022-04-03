@@ -72,7 +72,7 @@ const basketSlice = createSlice({
     },
     removeProduct(state: initialStateType, action: PayloadAction<number>) {
       state.productsInBasket = state.productsInBasket.filter(
-        (prod) => prod.price.id !== action.payload
+        (prod) => prod.id !== action.payload
       );
     },
   },

@@ -35,7 +35,7 @@ const Card: FC<IProductsType> = ({
       setProductsInBasket({
         countProdInBasket: 1,
         description,
-        id: id + images[currentImg].id + price[currentPrice].id,
+        id: Number("" + id + images[currentImg].id + price[currentPrice].id),
         name,
         category_id,
         images: images[currentImg],
