@@ -44,7 +44,7 @@ const Card: FC<IProductsType> = ({
     );
   };
 
-  if (!images.length || !price.length) {
+  if (!images || !price) {
     return <div>Loading</div>;
   }
   return (

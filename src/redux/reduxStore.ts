@@ -4,7 +4,7 @@ import category from "./reducers/categorySlice";
 import basket from "./reducers/basketSlice";
 import orders from "./reducers/orderSlice";
 import { categoryApi } from "../services/categoryAPI";
-import { productsApi } from "../services/productsAPI";
+// import { productsApi } from "../services/productsAPI";
 
 export const setupState = () => {
   return configureStore({
@@ -14,12 +14,12 @@ export const setupState = () => {
       basket,
       orders,
       [categoryApi.reducerPath]: categoryApi.reducer,
-      [productsApi.reducerPath]: productsApi.reducer,
+      // [productsApi.reducerPath]: productsApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(
-        categoryApi.middleware,
-        productsApi.middleware
+        categoryApi.middleware
+        // productsApi.middleware
       ),
   });
 };
