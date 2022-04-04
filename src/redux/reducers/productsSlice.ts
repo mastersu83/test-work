@@ -60,6 +60,7 @@ const productsSlice = createSlice({
       state.range.max = state.range.max + 12;
     },
     setCategoryId(state: initialStateType, action: PayloadAction<number>) {
+      state.products = [];
       state.categoryId = action.payload;
       state.range.min = 0;
       state.range.max = 11;
@@ -80,6 +81,8 @@ const productsSlice = createSlice({
         state.allProductsId = action.payload.map((prod) => prod.id);
         state.products = state.products.concat(action.payload);
         state.allProductsIdSuccess = true;
+      } else if (state.range.max >= 100) {
+        return;
       } else {
         state.allProductsId = action.payload.map((prod) => prod.id);
         state.products = action.payload;

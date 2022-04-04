@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "../Card/Card";
 import classes from "./Cards.module.scss";
 import {
@@ -8,45 +8,34 @@ import {
 } from "../../services/productsAPI";
 import { getMoreProducts } from "../../redux/reducers/productsSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/appHooks";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const Cards = () => {
   const dispatch = useAppDispatch();
-  // const { categoryId } = useAppSelector((state) => state.category);
+
+  const [fetching, setFetching] = useState(true);
 
   const { allProductsId, products, range, allProductsIdSuccess, categoryId } =
     useAppSelector((state) => state.products);
 
-  console.log(products);
-
-  // const { data: allProducts, isSuccess: isSuccessProducts } =
-  //   useGetCategoryProductsQuery({ categoryId, range });
-  //
-  // const { data: productsImg, isSuccess: isSuccessImg } =
-  //   useGetProductsImgQuery(allProductsId);
-  //
-  // const { data: productsPrice, isSuccess: isSuccessPrice } =
-  //   useGetProductsPriceQuery(allProductsId);
-
-  let test: number = 2;
-
   const moreProducts = () => {
-    if (products.length < 100) {
-      dispatch(getMoreProducts());
+    if (products.length >= 100) {
+      setFetching(false);
+      return;
     }
+    setTimeout(() => {
+      dispatch(getMoreProducts());
+    }, 500);
   };
 
   useEffect(() => {
-    // if (isSuccessProducts && isSuccessImg && isSuccessPrice) {
-    //   dispatch(getAllProductsId({ allProducts, productsImg, productsPrice }));
-    // }
-    dispatch(getCategoryProducts({ categoryId, range }));
+    if (products.length < 100) {
+      dispatch(getCategoryProducts({ categoryId, range }));
+      setFetching(true);
+    }
   }, [categoryId, range]);
 
   useEffect(() => {
-    // if (isSuccessProducts && isSuccessImg && isSuccessPrice) {
-    //   dispatch(getAllProductsId({ allProducts, productsImg, productsPrice }));
-    // }
-
     if (allProductsIdSuccess) {
       dispatch(getProductsImg(allProductsId));
       dispatch(getProductsPrice(allProductsId));
@@ -55,12 +44,28 @@ const Cards = () => {
 
   return (
     <div className={classes.card__container}>
-      <div className={classes.card__items}>
-        {products.map((prod) => (
-          <Card key={prod.id} {...prod} />
-        ))}
-      </div>
-      <button onClick={moreProducts}>Ещё товары</button>
+      <InfiniteScroll
+        dataLength={products.length}
+        next={moreProducts}
+        hasMore={fetching}
+        loader={
+          <div className={classes.loader}>
+            <span>Идёт Загрузка...</span>
+          </div>
+        }
+        style={{ overflow: "hidden" }}
+        endMessage={
+          <p style={{ textAlign: "center", marginTop: 20, color: "#2967ff" }}>
+            <b>В данной категории больше нет товаров</b>
+          </p>
+        }
+      >
+        <div className={classes.card__items}>
+          {products.map((prod) => (
+            <Card key={prod.id} {...prod} />
+          ))}
+        </div>
+      </InfiniteScroll>
     </div>
   );
 };
