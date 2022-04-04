@@ -60,7 +60,12 @@ const OrdersHistoryItem: FC<IProductsInOrder> = ({
           </div>
         </div>
         {orders.length ? (
-          <OrderPopup order={order} open={open} togglePopup={togglePopup} />
+          <OrderPopup
+            order={order}
+            sumOrder={sumOrder}
+            open={open}
+            togglePopup={togglePopup}
+          />
         ) : (
           <h2>В корзине нет товаров</h2>
         )}

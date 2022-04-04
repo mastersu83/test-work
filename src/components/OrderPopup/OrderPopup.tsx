@@ -2,7 +2,6 @@ import React, { FC } from "react";
 import group from "../../assets/img/Group.png";
 import classes from "../Basket/Basket.module.scss";
 import orderClasses from "./OrderPopup.module.scss";
-import { useAppSelector } from "../../hooks/appHooks";
 import OrderPopupItem from "../OrderPopupItem/OrderPopupItem";
 import { IProductsInBasket } from "../../redux/reducers/basketSlice";
 
@@ -10,11 +9,10 @@ type PropsType = {
   order: IProductsInBasket[];
   open: boolean;
   togglePopup: () => void;
+  sumOrder: number;
 };
 
-const OrderPopup: FC<PropsType> = ({ order, open, togglePopup }) => {
-  const { totalSum } = useAppSelector((state) => state.basket);
-
+const OrderPopup: FC<PropsType> = ({ order, open, togglePopup, sumOrder }) => {
   return (
     <div
       className={`${orderClasses.orderPopup__container} ${
@@ -28,7 +26,7 @@ const OrderPopup: FC<PropsType> = ({ order, open, togglePopup }) => {
           <h3 className={classes.checkout__title}>Товары</h3>
           <div className={classes.checkout__priceWrapper}>
             <span className={classes.checkout__price}>Стоимость заказа:</span>
-            <span className={classes.checkout__sum}>{totalSum} ₽</span>
+            <span className={classes.checkout__sum}>{sumOrder + 200} ₽</span>
           </div>
           <img src={group} alt="" className={classes.checkout__img} />
         </div>

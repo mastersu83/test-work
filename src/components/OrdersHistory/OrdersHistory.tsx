@@ -6,8 +6,6 @@ import { useAppSelector } from "../../hooks/appHooks";
 const OrdersHistory = () => {
   const { orders } = useAppSelector((state) => state.orders);
 
-  console.log(orders);
-
   return (
     <>
       <span className={classes.historyOrder__title}> История заказов</span>
