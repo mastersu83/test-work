@@ -33,7 +33,6 @@ function App() {
         </div>
         <RightBar />
       </div>
-      {/*<OrderPopup />*/}
       <Footer />
     </div>
   );

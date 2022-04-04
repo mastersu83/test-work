@@ -14,6 +14,7 @@
     "@types/redux-orm": "^0.16.1",
     "axios": "^0.26.1",
     "react": "^17.0.2",
+    "react-content-loader": "^6.2.0",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.2",

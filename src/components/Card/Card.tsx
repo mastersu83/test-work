@@ -3,6 +3,7 @@ import classes from "./Card.module.scss";
 import { IProductsType } from "../../types/productsType";
 import { setProductsInBasket } from "../../redux/reducers/basketSlice";
 import { useAppDispatch } from "../../hooks/appHooks";
+import CardLoader from "../CardLoader/CardLoader";
 
 const Card: FC<IProductsType> = ({
   description,
@@ -45,7 +46,7 @@ const Card: FC<IProductsType> = ({
   };
 
   if (!images || !price) {
-    return <div>Loading</div>;
+    return <CardLoader />;
   }
   return (
     <div className={classes.card__item}>

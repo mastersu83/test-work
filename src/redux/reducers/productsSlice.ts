@@ -59,6 +59,11 @@ const productsSlice = createSlice({
       state.range.min = state.range.min + 12;
       state.range.max = state.range.max + 12;
     },
+    setCategoryId(state: initialStateType, action: PayloadAction<number>) {
+      state.categoryId = action.payload;
+      state.range.min = 0;
+      state.range.max = 11;
+    },
   },
 
   extraReducers: {
@@ -69,9 +74,17 @@ const productsSlice = createSlice({
       state: initialStateType,
       action: PayloadAction<IProductsType[]>
     ) => {
-      state.allProductsId = action.payload.map((prod) => prod.id);
-      state.products = state.products.concat(action.payload);
-      state.allProductsIdSuccess = true;
+      if (
+        state.products.some((prod) => prod.category_id === state.categoryId)
+      ) {
+        state.allProductsId = action.payload.map((prod) => prod.id);
+        state.products = state.products.concat(action.payload);
+        state.allProductsIdSuccess = true;
+      } else {
+        state.allProductsId = action.payload.map((prod) => prod.id);
+        state.products = action.payload;
+        state.allProductsIdSuccess = true;
+      }
     },
 
     [getProductsImg.fulfilled.type]: (
@@ -102,6 +115,6 @@ const productsSlice = createSlice({
   },
 });
 
-export const { getAllProductsId, getMoreProducts } = productsSlice.actions;
+export const { setCategoryId, getMoreProducts } = productsSlice.actions;
 
 export default productsSlice.reducer;

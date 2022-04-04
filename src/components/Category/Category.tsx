@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import classes from "./Category.module.scss";
 import { useGetAllCategoriesQuery } from "../../services/categoryAPI";
 import { useAppDispatch } from "../../hooks/appHooks";
-import { setCategoryId } from "../../redux/reducers/categorySlice";
+import { setCategoryId } from "../../redux/reducers/productsSlice";
 
 const Category = () => {
   const dispatch = useAppDispatch();

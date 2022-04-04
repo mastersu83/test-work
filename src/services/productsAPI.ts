@@ -66,7 +66,6 @@ export const getCategoryProducts = createAsyncThunk(
 export const getProductsImg = createAsyncThunk(
   "products/getProductsImg",
   async (ids: number[], thunkAPI) => {
-    console.log(ids);
     const resp = await axios.get<IProductsImgType>(
       `https://test2.sionic.ru/api/productImages?filter={%22product_id%22:[${ids}]}`
     );
