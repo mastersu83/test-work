@@ -82,15 +82,16 @@ const Card: FC<IProductsType> = ({
       <span className={classes.card__title}>{description}</span>
       <div className={classes.card__priceBlock}>
         {price.map((price, index) => (
-          <span
+          <div
             key={price.id}
             onClick={() => setCurrentPrice(index)}
-            className={`${classes.card__price} ${
+            className={`${classes.card__priceItem} ${
               currentPrice === index ? `${classes.card__activePrice}` : ""
             }`}
           >
-            {price.price}₽
-          </span>
+            <span>{price.price}₽</span>
+            <span>{price.stock} шт.</span>
+          </div>
         ))}
       </div>
 
