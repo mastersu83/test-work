@@ -26,8 +26,6 @@ const Order = () => {
     setInputValue({ ...inputValue, [name]: value });
   };
 
-  console.log(inputValue);
-
   return (
     <div className={classes.order}>
       <span className={classes.order__title}> Доставка </span>

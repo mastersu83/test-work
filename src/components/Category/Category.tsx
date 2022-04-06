@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import classes from "./Category.module.scss";
 import { useGetAllCategoriesQuery } from "../../services/categoryAPI";
-import { useAppDispatch } from "../../hooks/appHooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/appHooks";
 import { setCategoryId } from "../../redux/reducers/productsSlice";
 
 const Category = () => {
   const dispatch = useAppDispatch();
+  const { categoryId } = useAppSelector((state) => state.products);
   const { data: categoryList } = useGetAllCategoriesQuery({});
-  const [active, setActive] = useState<number>(0);
+  const [active, setActive] = useState<number>(categoryId);
 
-  const getCategoryId = (id: number, index: number) => {
+  const getCategoryId = (id: number) => {
     dispatch(setCategoryId(id));
-    setActive(index);
+    setActive(id);
   };
 
   return (
@@ -23,12 +24,12 @@ const Category = () => {
 
       <div className={classes.category__tabs}>
         {categoryList &&
-          categoryList.map((cat, index) => (
+          categoryList.map((cat) => (
             <button
               key={cat.id}
-              onClick={() => getCategoryId(cat.id, index)}
+              onClick={() => getCategoryId(cat.id)}
               className={`${classes.category__tab} ${
-                active === index ? classes.active : ""
+                active === cat.id ? classes.active : ""
               }`}
             >
               {cat.name}

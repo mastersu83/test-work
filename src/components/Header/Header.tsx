@@ -1,19 +1,24 @@
 import React from "react";
 import basket from "../../assets/img/basket.svg";
 import avatar from "../../assets/img/avatar.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import classes from "./Header.module.scss";
 import { useAppSelector } from "../../hooks/appHooks";
 
 const Header = () => {
   const { productsInBasket } = useAppSelector((state) => state.basket);
+  const { pathname } = useLocation();
   return (
     <header className={classes.header}>
       <Link to="/">
         <h2 className={classes.logo}>React</h2>
       </Link>
       <div className={classes.header__locationBlock}>Александровск-Са...</div>
-      <div className={classes.searchBlock}>
+      <div
+        className={` ${classes.searchBlock} ${
+          pathname === "/" ? "" : classes.searchBlock__hidden
+        }`}
+      >
         <input
           type="text"
           className={classes.searchBlock__input}

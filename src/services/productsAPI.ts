@@ -46,6 +46,8 @@ import {
   IProductsImgType,
   IProductsPriceType,
   IProductsType,
+  IProductVariationPropertiesListType,
+  IProductVariationPropertiesType,
 } from "../types/productsType";
 
 export const getCategoryProducts = createAsyncThunk(
@@ -77,6 +79,33 @@ export const getProductsPrice = createAsyncThunk(
   async (ids: number[], thunkAPI) => {
     const resp = await axios.get<IProductsPriceType>(
       `https://test2.sionic.ru/api/ProductVariations?filter={%22product_id%22:[${ids}]}&sort=[%22price%22,%22ASC%22]`
+    );
+    return resp.data;
+  }
+);
+export const getProductVariationProperties = createAsyncThunk(
+  "products/getProductVariationProperties",
+  async () => {
+    const resp = await axios.get<IProductVariationPropertiesType>(
+      `https://test2.sionic.ru/api/ProductVariationProperties`
+    );
+    return resp.data;
+  }
+);
+export const getProductVariationPropertyListValues = createAsyncThunk(
+  "products/getProductVariationPropertyListValues",
+  async () => {
+    const resp = await axios.get<IProductVariationPropertiesListType>(
+      `https://test2.sionic.ru/api/ProductVariationPropertyListValues`
+    );
+    return resp.data;
+  }
+);
+export const getProductVariationPropertyValues = createAsyncThunk(
+  "products/getProductVariationPropertyValues",
+  async (id: number) => {
+    const resp = await axios.get<IProductsPriceType>(
+      `https://test2.sionic.ru/api/ProductVariationPropertyValues/?filter={%22product_variation_id%22:${id}}`
     );
     return resp.data;
   }

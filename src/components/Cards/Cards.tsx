@@ -5,6 +5,9 @@ import {
   getCategoryProducts,
   getProductsImg,
   getProductsPrice,
+  getProductVariationProperties,
+  getProductVariationPropertyListValues,
+  getProductVariationPropertyValues,
 } from "../../services/productsAPI";
 import { getMoreProducts } from "../../redux/reducers/productsSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/appHooks";
@@ -15,8 +18,14 @@ const Cards = () => {
 
   const [fetching, setFetching] = useState(true);
 
-  const { allProductsId, products, range, allProductsIdSuccess, categoryId } =
-    useAppSelector((state) => state.products);
+  const {
+    allProductsId,
+    products,
+    range,
+    allProductsIdSuccess,
+    categoryId,
+    allProductsSuccess,
+  } = useAppSelector((state) => state.products);
 
   const moreProducts = () => {
     if (products.length >= 100) {
@@ -42,6 +51,17 @@ const Cards = () => {
     }
   }, [allProductsIdSuccess]);
 
+  useEffect(() => {
+    if (allProductsSuccess) {
+      dispatch(getProductVariationPropertyValues(products[0].price[0].id));
+    }
+  }, [allProductsSuccess]);
+
+  useEffect(() => {
+    dispatch(getProductVariationProperties());
+    dispatch(getProductVariationPropertyListValues());
+  }, []);
+
   return (
     <div className={classes.card__container}>
       <InfiniteScroll
@@ -62,7 +82,11 @@ const Cards = () => {
       >
         <div className={classes.card__items}>
           {products.map((prod) => (
-            <Card key={prod.id} {...prod} />
+            <Card
+              key={prod.id}
+              {...prod}
+              allProductsSuccess={allProductsSuccess}
+            />
           ))}
         </div>
       </InfiniteScroll>

@@ -36,6 +36,12 @@
     display: flex;
     justify-content: space-between;
     column-gap: 10px;
+    transition: ease-in-out 0.3s;
+    &__hidden {
+      transition: ease-in-out 0.3s;
+      opacity: 0;
+      visibility: hidden;
+    }
     &__input {
       width: 100%;
       border: none;
