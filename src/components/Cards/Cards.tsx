@@ -51,11 +51,11 @@ const Cards = () => {
     }
   }, [allProductsIdSuccess]);
 
-  useEffect(() => {
-    if (allProductsSuccess) {
-      dispatch(getProductVariationPropertyValues(products[0].price[0].id));
-    }
-  }, [allProductsSuccess]);
+  // useEffect(() => {
+  //   if (allProductsSuccess) {
+  //     dispatch(getProductVariationPropertyValues(products[0].price[0].id));
+  //   }
+  // }, [allProductsSuccess]);
 
   useEffect(() => {
     dispatch(getProductVariationProperties());
